@@ -2,15 +2,22 @@ server:
   port: 8082
 
 spring:
+  application:
+    name: loan-service
+
   datasource:
-    url: jdbc:h2:mem:loans
+    url: jdbc:postgresql://localhost:5434/loan_db
+    username: loan_user
+    password: loan_pass
+    driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
-      ddl-auto: create-drop
-  web:
-    error:
-      include-message: always
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 
-services:
-  book:
-    url: http://localhost:8081   # read by the Feign client, never hard-coded in Java
+book-service:
+  url: http://localhost:8081
